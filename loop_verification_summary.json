@@ -1,0 +1,2239 @@
+{
+  "completed": [
+    "control4",
+    "sequence4",
+    "sequence4_bridge"
+  ],
+  "results": {
+    "control4": {
+      "config": {
+        "variant": "control4",
+        "fresh_from_pretrained": true,
+        "base_step": 0,
+        "base_model": "Efficient-Large-Model/Sana_600M_512px_diffusers",
+        "initialization": "original pretrained network and fresh AdamW",
+        "data": "jackyhate/text-to-image-2M",
+        "shard": "/tmp/sana_finetune2m/data_000000.tar",
+        "train_count": 49496,
+        "val_count": 500,
+        "epochs": 2,
+        "updates_per_epoch": 387,
+        "steps": 774,
+        "batch_per_device": 16,
+        "world": 8,
+        "global_batch_size": 128,
+        "tail_batch_size": 88,
+        "gradient_accumulation_steps": 1,
+        "supervised_points_per_image": 4,
+        "objective": "mean of four local (conditional FM + dual teacher MSE +0.1 CFG +0.1 normalized boundary MSE)",
+        "sequence": "uniform four-step full-refresh segment; same image and eps; true interpolants at every point",
+        "memory": "reset before each point",
+        "own_trajectory_training": false,
+        "full_layers": 28,
+        "student_layers": 10,
+        "student_keep_indices": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "anchor_every": 4,
+        "full_ode_steps_1based": [
+          1,
+          5,
+          9,
+          13,
+          17
+        ],
+        "image_size": 512,
+        "sampling_steps": 20,
+        "cfg": 4.5,
+        "bridge_enabled": false,
+        "bridge_rank": 256,
+        "feature_weight": 0,
+        "bridge_target_layers_1based": [
+          9,
+          28
+        ],
+        "bridge_initialization": "zero output weights and biases; initially identity",
+        "lr": 1e-05,
+        "grad_clip": 1.0,
+        "seed": 20260927,
+        "trainable_parameters": 220118432,
+        "resident_parameters": 591749024,
+        "training_forward_calls_per_image": {
+          "student": 4,
+          "teacher": 4
+        },
+        "code_sha256": "7e889863e94bbd87afb08b51475b9ce5a3789b3ee4658a95e603295bc6999ebf"
+      },
+      "completion": {
+        "step": 774,
+        "updates": 774,
+        "epochs": 2,
+        "samples": 98992,
+        "supervised_noise_points": 395968,
+        "elapsed_training_sec": 1855.3837485313416
+      },
+      "initial_validation": {
+        "step": 0,
+        "kind": "fixed_val_32_discrete_sigma",
+        "anchor_every": 4,
+        "real_mse": 1.8468942493200302,
+        "teacher_mse": 1.1559467303100064,
+        "cfg_mse": 5.041393720639462,
+        "teacher_real_mse": 0.7015255382284522,
+        "no_memory_real_mse": 1.8448594734072685,
+        "subnet_no_memory_real_mse": 2.1636648066341877,
+        "own_teacher_mse": 1.016548907253764,
+        "own_cfg_mse": 5.2394387261301745,
+        "own_latent_mse": 0.05179826258608955
+      },
+      "final_validation": {
+        "step": 774,
+        "kind": "fixed_val_32_discrete_sigma",
+        "anchor_every": 4,
+        "real_mse": 0.8363954089581966,
+        "teacher_mse": 0.13488301348115783,
+        "cfg_mse": 0.7534684868296608,
+        "teacher_real_mse": 0.7015255382284522,
+        "no_memory_real_mse": 0.8373199831694365,
+        "subnet_no_memory_real_mse": 0.8679603170603514,
+        "own_teacher_mse": 0.11981073055358138,
+        "own_cfg_mse": 0.6735146414139308,
+        "own_latent_mse": 0.013709469727473333
+      },
+      "initial_trajectory": {
+        "step": 0,
+        "kind": "fixed32_all20_sigmas",
+        "cases": 32,
+        "noise_points": 640,
+        "normal": {
+          "real_mse": 1.7583957724273205,
+          "teacher_mse": 1.0487939585000277,
+          "cfg_mse": 5.010755270719528,
+          "full_real_mse": 0.7010656520724297,
+          "subnet_real_mse": 2.1108392477035522,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.66733459532261
+        },
+        "zero": {
+          "real_mse": 1.7515748552978039,
+          "teacher_mse": 1.0393391475081444,
+          "cfg_mse": 5.096615724265575,
+          "full_real_mse": 0.7010656520724297,
+          "subnet_real_mse": 2.101744696497917,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.59049454033375
+        },
+        "shuffle": {
+          "real_mse": 1.740405097603798,
+          "teacher_mse": 1.028742304071784,
+          "cfg_mse": 4.98605389893055,
+          "full_real_mse": 0.7010656520724297,
+          "subnet_real_mse": 2.0868516601622105,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.634593901038171
+        },
+        "own20": {
+          "teacher_mse": 0.9558063503354788,
+          "cfg_mse": 4.928233779966831,
+          "teacher_endpoint_latent_mse": 1.5376121923327446
+        }
+      },
+      "final_trajectory": {
+        "step": 774,
+        "kind": "fixed32_all20_sigmas",
+        "cases": 32,
+        "noise_points": 640,
+        "normal": {
+          "real_mse": 0.8135899677872658,
+          "teacher_mse": 0.10931268834974617,
+          "cfg_mse": 0.761471850797534,
+          "full_real_mse": 0.68188317399472,
+          "subnet_real_mse": 0.8574922727420926,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.313142058253288
+        },
+        "zero": {
+          "real_mse": 0.8144847024232149,
+          "teacher_mse": 0.11000043817330152,
+          "cfg_mse": 0.7684792382642627,
+          "full_real_mse": 0.68188317399472,
+          "subnet_real_mse": 0.8586852410808206,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.222354921698569
+        },
+        "shuffle": {
+          "real_mse": 0.814796301536262,
+          "teacher_mse": 0.11021251208148897,
+          "cfg_mse": 0.7683389615267515,
+          "full_real_mse": 0.68188317399472,
+          "subnet_real_mse": 0.8591007143259048,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.290924400091171
+        },
+        "own20": {
+          "teacher_mse": 0.09269707975909114,
+          "cfg_mse": 0.6598105439916253,
+          "teacher_endpoint_latent_mse": 0.6226281244307756
+        }
+      },
+      "timing_seconds": {
+        "teacher": 0.6449117660522461,
+        "hybrid_loop": 0.4447052478790283,
+        "student_loop": 0.3374145030975342,
+        "full_shared": 0.7540737986564636
+      },
+      "peak_allocated_gib": 62.509289264678955,
+      "peak_reserved_gib": 71.9140625,
+      "last250_clip_fraction": 0.008,
+      "sample_schedule_sha256": "86c7a48a691e1ccc5ad4a68dfcb1c595136d3514176193dc0b69b1a539d14d0a",
+      "checkpoint_sha256": "ba40600831731989a6565462edad22f27c3542035f2f20a942b0877de53f5f33",
+      "exact_two_epoch_coverage": true,
+      "validation_history": [
+        {
+          "step": 0,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 1.8468942493200302,
+          "teacher_mse": 1.1559467303100064,
+          "cfg_mse": 5.041393720639462,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 1.8448594734072685,
+          "subnet_no_memory_real_mse": 2.1636648066341877,
+          "own_teacher_mse": 1.016548907253764,
+          "own_cfg_mse": 5.2394387261301745,
+          "own_latent_mse": 0.05179826258608955
+        },
+        {
+          "step": 100,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.9818571042269468,
+          "teacher_mse": 0.2765339495817898,
+          "cfg_mse": 1.0806544264778495,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.9836186766624451,
+          "subnet_no_memory_real_mse": 1.0121532380580902,
+          "own_teacher_mse": 0.23698939057067037,
+          "own_cfg_mse": 1.0280655296519399,
+          "own_latent_mse": 0.017047796960468986
+        },
+        {
+          "step": 200,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.9043725281953812,
+          "teacher_mse": 0.1999725205823779,
+          "cfg_mse": 0.9190208138898015,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.9057293478399515,
+          "subnet_no_memory_real_mse": 0.9270949698984623,
+          "own_teacher_mse": 0.17444812315807212,
+          "own_cfg_mse": 0.8487411644309759,
+          "own_latent_mse": 0.015314979364120518
+        },
+        {
+          "step": 300,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8790900055319071,
+          "teacher_mse": 0.17546270086313598,
+          "cfg_mse": 0.8606702003162354,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8803793210536242,
+          "subnet_no_memory_real_mse": 0.9034499917179346,
+          "own_teacher_mse": 0.15291971288388595,
+          "own_cfg_mse": 0.7574637143407017,
+          "own_latent_mse": 0.014688523624499794
+        },
+        {
+          "step": 387,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.866327696479857,
+          "teacher_mse": 0.16332155924465042,
+          "cfg_mse": 0.833045186009258,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8673748057335615,
+          "subnet_no_memory_real_mse": 0.8920949958264828,
+          "own_teacher_mse": 0.14317267603473738,
+          "own_cfg_mse": 0.7636584036517888,
+          "own_latent_mse": 0.014375736685906304
+        },
+        {
+          "step": 400,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.864440182223916,
+          "teacher_mse": 0.16171676225349074,
+          "cfg_mse": 0.8278731412719935,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8655573055148125,
+          "subnet_no_memory_real_mse": 0.8901678677648306,
+          "own_teacher_mse": 0.1412414949882077,
+          "own_cfg_mse": 0.7634436970110983,
+          "own_latent_mse": 0.014321355998617946
+        },
+        {
+          "step": 500,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8545158039778471,
+          "teacher_mse": 0.1523082885905751,
+          "cfg_mse": 0.7977187922224402,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8555864728987217,
+          "subnet_no_memory_real_mse": 0.8815526627004147,
+          "own_teacher_mse": 0.13314054576767376,
+          "own_cfg_mse": 0.7473268383182585,
+          "own_latent_mse": 0.014112275539446273
+        },
+        {
+          "step": 600,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8466414622962475,
+          "teacher_mse": 0.1449689821456559,
+          "cfg_mse": 0.7780326242791489,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8475533090531826,
+          "subnet_no_memory_real_mse": 0.8753569219261408,
+          "own_teacher_mse": 0.1273711893663858,
+          "own_cfg_mse": 0.717433268437162,
+          "own_latent_mse": 0.013933793252363103
+        },
+        {
+          "step": 700,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8403312982991338,
+          "teacher_mse": 0.13933842083497439,
+          "cfg_mse": 0.7681600399082527,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8410578332841396,
+          "subnet_no_memory_real_mse": 0.8708050008863211,
+          "own_teacher_mse": 0.12369598742225207,
+          "own_cfg_mse": 0.6900716600939631,
+          "own_latent_mse": 0.013810646427373285
+        },
+        {
+          "step": 774,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8363954089581966,
+          "teacher_mse": 0.13488301348115783,
+          "cfg_mse": 0.7534684868296608,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8373199831694365,
+          "subnet_no_memory_real_mse": 0.8679603170603514,
+          "own_teacher_mse": 0.11981073055358138,
+          "own_cfg_mse": 0.6735146414139308,
+          "own_latent_mse": 0.013709469727473333
+        }
+      ],
+      "trajectory_history": [
+        {
+          "step": 0,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 1.7583957724273205,
+            "teacher_mse": 1.0487939585000277,
+            "cfg_mse": 5.010755270719528,
+            "full_real_mse": 0.7010656520724297,
+            "subnet_real_mse": 2.1108392477035522,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.66733459532261
+          },
+          "zero": {
+            "real_mse": 1.7515748552978039,
+            "teacher_mse": 1.0393391475081444,
+            "cfg_mse": 5.096615724265575,
+            "full_real_mse": 0.7010656520724297,
+            "subnet_real_mse": 2.101744696497917,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.59049454033375
+          },
+          "shuffle": {
+            "real_mse": 1.740405097603798,
+            "teacher_mse": 1.028742304071784,
+            "cfg_mse": 4.98605389893055,
+            "full_real_mse": 0.7010656520724297,
+            "subnet_real_mse": 2.0868516601622105,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.634593901038171
+          },
+          "own20": {
+            "teacher_mse": 0.9558063503354788,
+            "cfg_mse": 4.928233779966831,
+            "teacher_endpoint_latent_mse": 1.5376121923327446
+          }
+        },
+        {
+          "step": 100,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.9423171263188124,
+            "teacher_mse": 0.22973857820034027,
+            "cfg_mse": 1.2272122111171484,
+            "full_real_mse": 0.7002881392836571,
+            "subnet_real_mse": 1.0229934938251972,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 8.049743375182153
+          },
+          "zero": {
+            "real_mse": 0.9433699566870928,
+            "teacher_mse": 0.2303739027120173,
+            "cfg_mse": 1.2368522360920906,
+            "full_real_mse": 0.7002881392836571,
+            "subnet_real_mse": 1.0243972782045603,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.955176740884779
+          },
+          "shuffle": {
+            "real_mse": 0.9434295389801264,
+            "teacher_mse": 0.23048881394788623,
+            "cfg_mse": 1.2322579696774483,
+            "full_real_mse": 0.7002881392836571,
+            "subnet_real_mse": 1.0244766790419817,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 8.033008715510368
+          },
+          "own20": {
+            "teacher_mse": 0.19182439940050244,
+            "cfg_mse": 1.11284433118999,
+            "teacher_endpoint_latent_mse": 0.8125871224328876
+          }
+        },
+        {
+          "step": 200,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8739984426647425,
+            "teacher_mse": 0.1638543475419283,
+            "cfg_mse": 0.9944752231240273,
+            "full_real_mse": 0.6939296377822757,
+            "subnet_real_mse": 0.9340214133262634,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.932128316164018
+          },
+          "zero": {
+            "real_mse": 0.8750461544841528,
+            "teacher_mse": 0.16460430691950023,
+            "cfg_mse": 1.004021367058158,
+            "full_real_mse": 0.6939296377822757,
+            "subnet_real_mse": 0.9354183375835419,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.837902212142943
+          },
+          "shuffle": {
+            "real_mse": 0.8752334788441658,
+            "teacher_mse": 0.16485319682396948,
+            "cfg_mse": 1.002372283488512,
+            "full_real_mse": 0.6939296377822757,
+            "subnet_real_mse": 0.9356681406497955,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.913586321473122
+          },
+          "own20": {
+            "teacher_mse": 0.1374028257559985,
+            "cfg_mse": 0.8972081784158945,
+            "teacher_endpoint_latent_mse": 0.7122735949233174
+          }
+        },
+        {
+          "step": 300,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.851373159326613,
+            "teacher_mse": 0.14205339760519564,
+            "cfg_mse": 0.9048275984823704,
+            "full_real_mse": 0.6885710470378399,
+            "subnet_real_mse": 0.9056405685842037,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.805719947814943
+          },
+          "zero": {
+            "real_mse": 0.8524237889796495,
+            "teacher_mse": 0.14290545182302594,
+            "cfg_mse": 0.9129283577203751,
+            "full_real_mse": 0.6885710470378399,
+            "subnet_real_mse": 0.9070414090529084,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.711544537544252
+          },
+          "shuffle": {
+            "real_mse": 0.8526054304093122,
+            "teacher_mse": 0.14303391939029098,
+            "cfg_mse": 0.912134101614356,
+            "full_real_mse": 0.6885710470378399,
+            "subnet_real_mse": 0.9072835948318243,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.786082908511163
+          },
+          "own20": {
+            "teacher_mse": 0.12042562128044665,
+            "cfg_mse": 0.7961926003918052,
+            "teacher_endpoint_latent_mse": 0.6882587280124426
+          }
+        },
+        {
+          "step": 387,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8398187886923552,
+            "teacher_mse": 0.13218810711987317,
+            "cfg_mse": 0.8604716062545776,
+            "full_real_mse": 0.6856104210019112,
+            "subnet_real_mse": 0.8912216071039438,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.69981307387352
+          },
+          "zero": {
+            "real_mse": 0.8406882164999843,
+            "teacher_mse": 0.13288757344707847,
+            "cfg_mse": 0.8693619705736637,
+            "full_real_mse": 0.6856104210019112,
+            "subnet_real_mse": 0.8923808401450515,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.606648343801497
+          },
+          "shuffle": {
+            "real_mse": 0.8409341974183917,
+            "teacher_mse": 0.1330306886229664,
+            "cfg_mse": 0.8680812176316977,
+            "full_real_mse": 0.6856104210019112,
+            "subnet_real_mse": 0.8927088128402829,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.6794222831726096
+          },
+          "own20": {
+            "teacher_mse": 0.11350286286324263,
+            "cfg_mse": 0.7641743440181017,
+            "teacher_endpoint_latent_mse": 0.6823981702327728
+          }
+        },
+        {
+          "step": 400,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8379884567111731,
+            "teacher_mse": 0.1307625116314739,
+            "cfg_mse": 0.8556611686944962,
+            "full_real_mse": 0.6853726003319025,
+            "subnet_real_mse": 0.8888604333624244,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.687296476960183
+          },
+          "zero": {
+            "real_mse": 0.8389581749215722,
+            "teacher_mse": 0.13155382545664907,
+            "cfg_mse": 0.863889298401773,
+            "full_real_mse": 0.6853726003319025,
+            "subnet_real_mse": 0.8901533950120211,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.594256308674813
+          },
+          "shuffle": {
+            "real_mse": 0.839215062558651,
+            "teacher_mse": 0.13171959528699517,
+            "cfg_mse": 0.8629036527127028,
+            "full_real_mse": 0.6853726003319025,
+            "subnet_real_mse": 0.8904959158971906,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.6669096618890755
+          },
+          "own20": {
+            "teacher_mse": 0.11134135932661593,
+            "cfg_mse": 0.7539729792624712,
+            "teacher_endpoint_latent_mse": 0.6777391321957111
+          }
+        },
+        {
+          "step": 500,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8295014407485723,
+            "teacher_mse": 0.12260437128134072,
+            "cfg_mse": 0.821251473389566,
+            "full_real_mse": 0.6838355641812086,
+            "subnet_real_mse": 0.8780567664653063,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.5758459657430635
+          },
+          "zero": {
+            "real_mse": 0.8304875763133168,
+            "teacher_mse": 0.12338072503916919,
+            "cfg_mse": 0.828785558231175,
+            "full_real_mse": 0.6838355641812086,
+            "subnet_real_mse": 0.8793716141954064,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.4830906212329875
+          },
+          "shuffle": {
+            "real_mse": 0.8308563018217683,
+            "teacher_mse": 0.12368006049655378,
+            "cfg_mse": 0.8287501260638237,
+            "full_real_mse": 0.6838355641812086,
+            "subnet_real_mse": 0.8798632500693202,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.555050009489061
+          },
+          "own20": {
+            "teacher_mse": 0.1039204930420965,
+            "cfg_mse": 0.7254403363913298,
+            "teacher_endpoint_latent_mse": 0.6624514507129788
+          }
+        },
+        {
+          "step": 600,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.822382234968245,
+            "teacher_mse": 0.11718518612906337,
+            "cfg_mse": 0.7933361353352666,
+            "full_real_mse": 0.6828595595434308,
+            "subnet_real_mse": 0.8688898403197527,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.486207064986227
+          },
+          "zero": {
+            "real_mse": 0.8232222897931933,
+            "teacher_mse": 0.11785236420109868,
+            "cfg_mse": 0.8003379069268703,
+            "full_real_mse": 0.6828595595434308,
+            "subnet_real_mse": 0.8700098851695657,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.39383815228939
+          },
+          "shuffle": {
+            "real_mse": 0.8236223328858614,
+            "teacher_mse": 0.11816194141283631,
+            "cfg_mse": 0.8000971702858806,
+            "full_real_mse": 0.6828595595434308,
+            "subnet_real_mse": 0.8705433011054993,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.464893677830697
+          },
+          "own20": {
+            "teacher_mse": 0.09940428100526333,
+            "cfg_mse": 0.7012032438069582,
+            "teacher_endpoint_latent_mse": 0.6513400105759501
+          }
+        },
+        {
+          "step": 700,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8166433209553361,
+            "teacher_mse": 0.11272557755000889,
+            "cfg_mse": 0.7739467993378639,
+            "full_real_mse": 0.6822951156646013,
+            "subnet_real_mse": 0.8614261038601398,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.390747493505476
+          },
+          "zero": {
+            "real_mse": 0.8173679960891604,
+            "teacher_mse": 0.11326413019560277,
+            "cfg_mse": 0.7816664688289165,
+            "full_real_mse": 0.6822951156646013,
+            "subnet_real_mse": 0.8623923342674971,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.298665425181391
+          },
+          "shuffle": {
+            "real_mse": 0.8177638342604041,
+            "teacher_mse": 0.11355169583112001,
+            "cfg_mse": 0.7808379037305713,
+            "full_real_mse": 0.6822951156646013,
+            "subnet_real_mse": 0.8629201017320156,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.369317632913589
+          },
+          "own20": {
+            "teacher_mse": 0.09580667444970459,
+            "cfg_mse": 0.6738569941371679,
+            "teacher_endpoint_latent_mse": 0.6430654609575868
+          }
+        },
+        {
+          "step": 774,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8135899677872658,
+            "teacher_mse": 0.10931268834974617,
+            "cfg_mse": 0.761471850797534,
+            "full_real_mse": 0.68188317399472,
+            "subnet_real_mse": 0.8574922727420926,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.313142058253288
+          },
+          "zero": {
+            "real_mse": 0.8144847024232149,
+            "teacher_mse": 0.11000043817330152,
+            "cfg_mse": 0.7684792382642627,
+            "full_real_mse": 0.68188317399472,
+            "subnet_real_mse": 0.8586852410808206,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.222354921698569
+          },
+          "shuffle": {
+            "real_mse": 0.814796301536262,
+            "teacher_mse": 0.11021251208148897,
+            "cfg_mse": 0.7683389615267515,
+            "full_real_mse": 0.68188317399472,
+            "subnet_real_mse": 0.8591007143259048,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.290924400091171
+          },
+          "own20": {
+            "teacher_mse": 0.09269707975909114,
+            "cfg_mse": 0.6598105439916253,
+            "teacher_endpoint_latent_mse": 0.6226281244307756
+          }
+        }
+      ]
+    },
+    "sequence4": {
+      "config": {
+        "variant": "sequence4",
+        "fresh_from_pretrained": true,
+        "base_step": 0,
+        "base_model": "Efficient-Large-Model/Sana_600M_512px_diffusers",
+        "initialization": "original pretrained network and fresh AdamW",
+        "data": "jackyhate/text-to-image-2M",
+        "shard": "/tmp/sana_finetune2m/data_000000.tar",
+        "train_count": 49496,
+        "val_count": 500,
+        "epochs": 2,
+        "updates_per_epoch": 387,
+        "steps": 774,
+        "batch_per_device": 16,
+        "world": 8,
+        "global_batch_size": 128,
+        "tail_batch_size": 88,
+        "gradient_accumulation_steps": 1,
+        "supervised_points_per_image": 4,
+        "objective": "mean of four local (conditional FM + dual teacher MSE +0.1 CFG +0.1 normalized boundary MSE)",
+        "sequence": "uniform four-step full-refresh segment; same image and eps; true interpolants at every point",
+        "memory": "detached state across four points",
+        "own_trajectory_training": false,
+        "full_layers": 28,
+        "student_layers": 10,
+        "student_keep_indices": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "anchor_every": 4,
+        "full_ode_steps_1based": [
+          1,
+          5,
+          9,
+          13,
+          17
+        ],
+        "image_size": 512,
+        "sampling_steps": 20,
+        "cfg": 4.5,
+        "bridge_enabled": false,
+        "bridge_rank": 256,
+        "feature_weight": 0,
+        "bridge_target_layers_1based": [
+          9,
+          28
+        ],
+        "bridge_initialization": "zero output weights and biases; initially identity",
+        "lr": 1e-05,
+        "grad_clip": 1.0,
+        "seed": 20260927,
+        "trainable_parameters": 220118432,
+        "resident_parameters": 591749024,
+        "training_forward_calls_per_image": {
+          "student": 4,
+          "teacher": 4
+        },
+        "code_sha256": "7e889863e94bbd87afb08b51475b9ce5a3789b3ee4658a95e603295bc6999ebf"
+      },
+      "completion": {
+        "step": 774,
+        "updates": 774,
+        "epochs": 2,
+        "samples": 98992,
+        "supervised_noise_points": 395968,
+        "elapsed_training_sec": 1851.2014870643616
+      },
+      "initial_validation": {
+        "step": 0,
+        "kind": "fixed_val_32_discrete_sigma",
+        "anchor_every": 4,
+        "real_mse": 1.8468942493200302,
+        "teacher_mse": 1.1559467303100064,
+        "cfg_mse": 5.041393720639462,
+        "teacher_real_mse": 0.7015255382284522,
+        "no_memory_real_mse": 1.8448594734072685,
+        "subnet_no_memory_real_mse": 2.1636648066341877,
+        "own_teacher_mse": 1.016548907253764,
+        "own_cfg_mse": 5.2394387261301745,
+        "own_latent_mse": 0.05179826258608955
+      },
+      "final_validation": {
+        "step": 774,
+        "kind": "fixed_val_32_discrete_sigma",
+        "anchor_every": 4,
+        "real_mse": 0.8362633856013417,
+        "teacher_mse": 0.1349453339644242,
+        "cfg_mse": 0.7569809118285775,
+        "teacher_real_mse": 0.7015255382284522,
+        "no_memory_real_mse": 0.8376019122079015,
+        "subnet_no_memory_real_mse": 0.868424073792994,
+        "own_teacher_mse": 0.1197880467880168,
+        "own_cfg_mse": 0.6760149069014005,
+        "own_latent_mse": 0.013706174717299291
+      },
+      "initial_trajectory": {
+        "step": 0,
+        "kind": "fixed32_all20_sigmas",
+        "cases": 32,
+        "noise_points": 640,
+        "normal": {
+          "real_mse": 1.7583957724273205,
+          "teacher_mse": 1.0487939585000277,
+          "cfg_mse": 5.010755270719528,
+          "full_real_mse": 0.7010656520724297,
+          "subnet_real_mse": 2.1108392477035522,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.66733459532261
+        },
+        "zero": {
+          "real_mse": 1.7515748552978039,
+          "teacher_mse": 1.0393391475081444,
+          "cfg_mse": 5.096615724265575,
+          "full_real_mse": 0.7010656520724297,
+          "subnet_real_mse": 2.101744696497917,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.59049454033375
+        },
+        "shuffle": {
+          "real_mse": 1.740405097603798,
+          "teacher_mse": 1.028742304071784,
+          "cfg_mse": 4.98605389893055,
+          "full_real_mse": 0.7010656520724297,
+          "subnet_real_mse": 2.0868516601622105,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.634593901038171
+        },
+        "own20": {
+          "teacher_mse": 0.9558063503354788,
+          "cfg_mse": 4.928233779966831,
+          "teacher_endpoint_latent_mse": 1.5376121923327446
+        }
+      },
+      "final_trajectory": {
+        "step": 774,
+        "kind": "fixed32_all20_sigmas",
+        "cases": 32,
+        "noise_points": 640,
+        "normal": {
+          "real_mse": 0.8136530360206962,
+          "teacher_mse": 0.10944008908700198,
+          "cfg_mse": 0.7624353338032961,
+          "full_real_mse": 0.6818291284143925,
+          "subnet_real_mse": 0.8575943699106574,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.2634179174900035
+        },
+        "zero": {
+          "real_mse": 0.8149476312100887,
+          "teacher_mse": 0.11051984003279358,
+          "cfg_mse": 0.7708306489512324,
+          "full_real_mse": 0.6818291284143925,
+          "subnet_real_mse": 0.8593204906210303,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.173536843061445
+        },
+        "shuffle": {
+          "real_mse": 0.8152353595942259,
+          "teacher_mse": 0.1106942156329751,
+          "cfg_mse": 0.7704019779339433,
+          "full_real_mse": 0.6818291284143925,
+          "subnet_real_mse": 0.859704153612256,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.241183176636696
+        },
+        "own20": {
+          "teacher_mse": 0.09238395467400551,
+          "cfg_mse": 0.6628641970455647,
+          "teacher_endpoint_latent_mse": 0.6202646382153034
+        }
+      },
+      "timing_seconds": {
+        "teacher": 0.6402567625045776,
+        "hybrid_loop": 0.4320007562637329,
+        "student_loop": 0.3380531668663025,
+        "full_shared": 0.7328070402145386
+      },
+      "peak_allocated_gib": 62.50913143157959,
+      "peak_reserved_gib": 71.9140625,
+      "last250_clip_fraction": 0.008,
+      "sample_schedule_sha256": "86c7a48a691e1ccc5ad4a68dfcb1c595136d3514176193dc0b69b1a539d14d0a",
+      "checkpoint_sha256": "2dcb67f7ea0881e9b1fbbbf6552c339a9a452630e7bae8357552a4d0fa3ebdab",
+      "exact_two_epoch_coverage": true,
+      "validation_history": [
+        {
+          "step": 0,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 1.8468942493200302,
+          "teacher_mse": 1.1559467303100064,
+          "cfg_mse": 5.041393720639462,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 1.8448594734072685,
+          "subnet_no_memory_real_mse": 2.1636648066341877,
+          "own_teacher_mse": 1.016548907253764,
+          "own_cfg_mse": 5.2394387261301745,
+          "own_latent_mse": 0.05179826258608955
+        },
+        {
+          "step": 100,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.9821787606924772,
+          "teacher_mse": 0.2771054846671177,
+          "cfg_mse": 1.0795335341244936,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.984261529520154,
+          "subnet_no_memory_real_mse": 1.0130774024873972,
+          "own_teacher_mse": 0.23750303384440485,
+          "own_cfg_mse": 1.0280392044223845,
+          "own_latent_mse": 0.017040859469489078
+        },
+        {
+          "step": 200,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.9038485791534185,
+          "teacher_mse": 0.19975304082618095,
+          "cfg_mse": 0.9172862870618701,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.905647536739707,
+          "subnet_no_memory_real_mse": 0.9272147808223963,
+          "own_teacher_mse": 0.17383168550441042,
+          "own_cfg_mse": 0.8399389102123678,
+          "own_latent_mse": 0.015312765524868155
+        },
+        {
+          "step": 300,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8790669068694115,
+          "teacher_mse": 0.17570912666269578,
+          "cfg_mse": 0.8609466173220426,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8808149080723524,
+          "subnet_no_memory_real_mse": 0.9041634853929281,
+          "own_teacher_mse": 0.1532913024566369,
+          "own_cfg_mse": 0.75704343279358,
+          "own_latent_mse": 0.014702007447340293
+        },
+        {
+          "step": 387,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8668602230027318,
+          "teacher_mse": 0.16390888947353233,
+          "cfg_mse": 0.8348803212866187,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8683553859591484,
+          "subnet_no_memory_real_mse": 0.8930458761751652,
+          "own_teacher_mse": 0.14326249256555457,
+          "own_cfg_mse": 0.770883996039629,
+          "own_latent_mse": 0.014398972583876457
+        },
+        {
+          "step": 400,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8650014698505402,
+          "teacher_mse": 0.16229672676854534,
+          "cfg_mse": 0.8304524007253349,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8665632624179125,
+          "subnet_no_memory_real_mse": 0.891245573759079,
+          "own_teacher_mse": 0.14147447046707384,
+          "own_cfg_mse": 0.7685167447198182,
+          "own_latent_mse": 0.014361167781316908
+        },
+        {
+          "step": 500,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8544403640553355,
+          "teacher_mse": 0.15261384585028281,
+          "cfg_mse": 0.7992420049849898,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8560054134577513,
+          "subnet_no_memory_real_mse": 0.8821933697909117,
+          "own_teacher_mse": 0.13296498291310854,
+          "own_cfg_mse": 0.7445764758158475,
+          "own_latent_mse": 0.01415397529672191
+        },
+        {
+          "step": 600,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8461856544017792,
+          "teacher_mse": 0.14497257835319033,
+          "cfg_mse": 0.782595913624391,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8475019354373217,
+          "subnet_no_memory_real_mse": 0.875569511204958,
+          "own_teacher_mse": 0.12747332125582034,
+          "own_cfg_mse": 0.7095857596723363,
+          "own_latent_mse": 0.013982867894810624
+        },
+        {
+          "step": 700,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.840195675380528,
+          "teacher_mse": 0.1392725454934407,
+          "cfg_mse": 0.7721660633105785,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.841433341614902,
+          "subnet_no_memory_real_mse": 0.8713788567110896,
+          "own_teacher_mse": 0.12362406015745364,
+          "own_cfg_mse": 0.6919627211173065,
+          "own_latent_mse": 0.013830669497110648
+        },
+        {
+          "step": 774,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8362633856013417,
+          "teacher_mse": 0.1349453339644242,
+          "cfg_mse": 0.7569809118285775,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8376019122079015,
+          "subnet_no_memory_real_mse": 0.868424073792994,
+          "own_teacher_mse": 0.1197880467880168,
+          "own_cfg_mse": 0.6760149069014005,
+          "own_latent_mse": 0.013706174717299291
+        }
+      ],
+      "trajectory_history": [
+        {
+          "step": 0,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 1.7583957724273205,
+            "teacher_mse": 1.0487939585000277,
+            "cfg_mse": 5.010755270719528,
+            "full_real_mse": 0.7010656520724297,
+            "subnet_real_mse": 2.1108392477035522,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.66733459532261
+          },
+          "zero": {
+            "real_mse": 1.7515748552978039,
+            "teacher_mse": 1.0393391475081444,
+            "cfg_mse": 5.096615724265575,
+            "full_real_mse": 0.7010656520724297,
+            "subnet_real_mse": 2.101744696497917,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.59049454033375
+          },
+          "shuffle": {
+            "real_mse": 1.740405097603798,
+            "teacher_mse": 1.028742304071784,
+            "cfg_mse": 4.98605389893055,
+            "full_real_mse": 0.7010656520724297,
+            "subnet_real_mse": 2.0868516601622105,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.634593901038171
+          },
+          "own20": {
+            "teacher_mse": 0.9558063503354788,
+            "cfg_mse": 4.928233779966831,
+            "teacher_endpoint_latent_mse": 1.5376121923327446
+          }
+        },
+        {
+          "step": 100,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.942708732560277,
+            "teacher_mse": 0.23008950054645538,
+            "cfg_mse": 1.2281015813350677,
+            "full_real_mse": 0.7001927588135004,
+            "subnet_real_mse": 1.0235474146902561,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 8.052812537550926
+          },
+          "zero": {
+            "real_mse": 0.9440950565040112,
+            "teacher_mse": 0.2310833279043436,
+            "cfg_mse": 1.238336592912674,
+            "full_real_mse": 0.7001927588135004,
+            "subnet_real_mse": 1.025395853444934,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.9583533674478515
+          },
+          "shuffle": {
+            "real_mse": 0.9441160317510366,
+            "teacher_mse": 0.23113943310454488,
+            "cfg_mse": 1.2336146794259548,
+            "full_real_mse": 0.7001927588135004,
+            "subnet_real_mse": 1.0254238080233335,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 8.035852205753326
+          },
+          "own20": {
+            "teacher_mse": 0.19007306592538953,
+            "cfg_mse": 1.1106392815709114,
+            "teacher_endpoint_latent_mse": 0.8033803347498178
+          }
+        },
+        {
+          "step": 200,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8740427726879716,
+            "teacher_mse": 0.16393680637702346,
+            "cfg_mse": 0.9946060068905354,
+            "full_real_mse": 0.6937950616702437,
+            "subnet_real_mse": 0.934125404804945,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.9288341999053955
+          },
+          "zero": {
+            "real_mse": 0.8754565380513668,
+            "teacher_mse": 0.16504962043836713,
+            "cfg_mse": 1.0048991087824106,
+            "full_real_mse": 0.6937950616702437,
+            "subnet_real_mse": 0.9360103905200958,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.835820600390435
+          },
+          "shuffle": {
+            "real_mse": 0.8755839234218001,
+            "teacher_mse": 0.1652379825245589,
+            "cfg_mse": 1.003073189407587,
+            "full_real_mse": 0.6937950616702437,
+            "subnet_real_mse": 0.936180243268609,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.909924998879433
+          },
+          "own20": {
+            "teacher_mse": 0.1363337563816458,
+            "cfg_mse": 0.8957084836438298,
+            "teacher_endpoint_latent_mse": 0.7057808628305793
+          }
+        },
+        {
+          "step": 300,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.851722770370543,
+            "teacher_mse": 0.142357116099447,
+            "cfg_mse": 0.9036205746233463,
+            "full_real_mse": 0.6882870923727751,
+            "subnet_real_mse": 0.9062013542279601,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.783716353774069
+          },
+          "zero": {
+            "real_mse": 0.853110340423882,
+            "teacher_mse": 0.14355230098590255,
+            "cfg_mse": 0.9125122167170048,
+            "full_real_mse": 0.6882870923727751,
+            "subnet_real_mse": 0.9080514498054981,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.690579134225844
+          },
+          "shuffle": {
+            "real_mse": 0.8532290142029524,
+            "teacher_mse": 0.14361571543850005,
+            "cfg_mse": 0.9115394037216902,
+            "full_real_mse": 0.6882870923727751,
+            "subnet_real_mse": 0.9082096936181188,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.763868230581282
+          },
+          "own20": {
+            "teacher_mse": 0.11956979730166495,
+            "cfg_mse": 0.7934477878734469,
+            "teacher_endpoint_latent_mse": 0.6829217411577702
+          }
+        },
+        {
+          "step": 387,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8398056337609887,
+            "teacher_mse": 0.13244085665792227,
+            "cfg_mse": 0.8631354672834277,
+            "full_real_mse": 0.6853563711047173,
+            "subnet_real_mse": 0.891288754530251,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.646613085269929
+          },
+          "zero": {
+            "real_mse": 0.841068415902555,
+            "teacher_mse": 0.1335371530149132,
+            "cfg_mse": 0.8731135623529553,
+            "full_real_mse": 0.6853563711047173,
+            "subnet_real_mse": 0.8929724683985114,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.555126413702967
+          },
+          "shuffle": {
+            "real_mse": 0.8412663321942091,
+            "teacher_mse": 0.13363180961459875,
+            "cfg_mse": 0.871434218250215,
+            "full_real_mse": 0.6853563711047173,
+            "subnet_real_mse": 0.8932363390922546,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.626037684082982
+          },
+          "own20": {
+            "teacher_mse": 0.11291740089654922,
+            "cfg_mse": 0.7666915077716112,
+            "teacher_endpoint_latent_mse": 0.6773963654413819
+          }
+        },
+        {
+          "step": 400,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8380798622965813,
+            "teacher_mse": 0.13105731224641204,
+            "cfg_mse": 0.857188954949379,
+            "full_real_mse": 0.6851470433175564,
+            "subnet_real_mse": 0.8890574900433421,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.6417226105928435
+          },
+          "zero": {
+            "real_mse": 0.8394358223304152,
+            "teacher_mse": 0.1322310953401029,
+            "cfg_mse": 0.8666062457486987,
+            "full_real_mse": 0.6851470433175564,
+            "subnet_real_mse": 0.8908654479309916,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.55010932981968
+          },
+          "shuffle": {
+            "real_mse": 0.8396351179108024,
+            "teacher_mse": 0.13234219211153686,
+            "cfg_mse": 0.8653329471126199,
+            "full_real_mse": 0.6851470433175564,
+            "subnet_real_mse": 0.8911311663687229,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.621210697293282
+          },
+          "own20": {
+            "teacher_mse": 0.11098928493447602,
+            "cfg_mse": 0.7573528550565243,
+            "teacher_endpoint_latent_mse": 0.6750771859660745
+          }
+        },
+        {
+          "step": 500,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8294564876705408,
+            "teacher_mse": 0.12292567756958306,
+            "cfg_mse": 0.8197624133899808,
+            "full_real_mse": 0.6836615409702063,
+            "subnet_real_mse": 0.8780548423528671,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.535222816467285
+          },
+          "zero": {
+            "real_mse": 0.8308470118790865,
+            "teacher_mse": 0.12408977886661887,
+            "cfg_mse": 0.8285817001014948,
+            "full_real_mse": 0.6836615409702063,
+            "subnet_real_mse": 0.8799088532105088,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.443627083301545
+          },
+          "shuffle": {
+            "real_mse": 0.8311664098873734,
+            "teacher_mse": 0.12434125854633749,
+            "cfg_mse": 0.8281963877379894,
+            "full_real_mse": 0.6836615409702063,
+            "subnet_real_mse": 0.8803347544744611,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.514291748404504
+          },
+          "own20": {
+            "teacher_mse": 0.10349739715456963,
+            "cfg_mse": 0.7227000491693616,
+            "teacher_endpoint_latent_mse": 0.6574948746711016
+          }
+        },
+        {
+          "step": 600,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8222255101427436,
+            "teacher_mse": 0.1173120983876288,
+            "cfg_mse": 0.7939175395295024,
+            "full_real_mse": 0.6827863957732916,
+            "subnet_real_mse": 0.8687052568420768,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.436185342073441
+          },
+          "zero": {
+            "real_mse": 0.8234482826665044,
+            "teacher_mse": 0.1183622507378459,
+            "cfg_mse": 0.8022456113249063,
+            "full_real_mse": 0.6827863957732916,
+            "subnet_real_mse": 0.87033561617136,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.344693705439569
+          },
+          "shuffle": {
+            "real_mse": 0.8238076465204358,
+            "teacher_mse": 0.11861704103648663,
+            "cfg_mse": 0.8015678059309721,
+            "full_real_mse": 0.6827863957732916,
+            "subnet_real_mse": 0.8708147490397096,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.414724436402322
+          },
+          "own20": {
+            "teacher_mse": 0.09916930994950235,
+            "cfg_mse": 0.7034974405542016,
+            "teacher_endpoint_latent_mse": 0.6504908129572868
+          }
+        },
+        {
+          "step": 700,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.816429853439331,
+            "teacher_mse": 0.1126741849584505,
+            "cfg_mse": 0.7745100762695074,
+            "full_real_mse": 0.6823531119152904,
+            "subnet_real_mse": 0.8611221145838499,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.331390938162801
+          },
+          "zero": {
+            "real_mse": 0.8175582373514771,
+            "teacher_mse": 0.1136201424524188,
+            "cfg_mse": 0.783581699244678,
+            "full_real_mse": 0.6823531119152904,
+            "subnet_real_mse": 0.8626266457140446,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.240347778797149
+          },
+          "shuffle": {
+            "real_mse": 0.817910467274487,
+            "teacher_mse": 0.11385872913524508,
+            "cfg_mse": 0.7823298936709762,
+            "full_real_mse": 0.6823531119152904,
+            "subnet_real_mse": 0.8630962902680039,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.309828284382822
+          },
+          "own20": {
+            "teacher_mse": 0.09567296470049769,
+            "cfg_mse": 0.6743389330804348,
+            "teacher_endpoint_latent_mse": 0.6388790588825941
+          }
+        },
+        {
+          "step": 774,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8136530360206962,
+            "teacher_mse": 0.10944008908700198,
+            "cfg_mse": 0.7624353338032961,
+            "full_real_mse": 0.6818291284143925,
+            "subnet_real_mse": 0.8575943699106574,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.2634179174900035
+          },
+          "zero": {
+            "real_mse": 0.8149476312100887,
+            "teacher_mse": 0.11051984003279358,
+            "cfg_mse": 0.7708306489512324,
+            "full_real_mse": 0.6818291284143925,
+            "subnet_real_mse": 0.8593204906210303,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.173536843061445
+          },
+          "shuffle": {
+            "real_mse": 0.8152353595942259,
+            "teacher_mse": 0.1106942156329751,
+            "cfg_mse": 0.7704019779339433,
+            "full_real_mse": 0.6818291284143925,
+            "subnet_real_mse": 0.859704153612256,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.241183176636696
+          },
+          "own20": {
+            "teacher_mse": 0.09238395467400551,
+            "cfg_mse": 0.6628641970455647,
+            "teacher_endpoint_latent_mse": 0.6202646382153034
+          }
+        }
+      ]
+    },
+    "sequence4_bridge": {
+      "config": {
+        "variant": "sequence4_bridge",
+        "fresh_from_pretrained": true,
+        "base_step": 0,
+        "base_model": "Efficient-Large-Model/Sana_600M_512px_diffusers",
+        "initialization": "original pretrained network and fresh AdamW",
+        "data": "jackyhate/text-to-image-2M",
+        "shard": "/tmp/sana_finetune2m/data_000000.tar",
+        "train_count": 49496,
+        "val_count": 500,
+        "epochs": 2,
+        "updates_per_epoch": 387,
+        "steps": 774,
+        "batch_per_device": 16,
+        "world": 8,
+        "global_batch_size": 128,
+        "tail_batch_size": 88,
+        "gradient_accumulation_steps": 1,
+        "supervised_points_per_image": 4,
+        "objective": "mean of four local (conditional FM + dual teacher MSE +0.1 CFG +0.1 normalized boundary MSE)",
+        "sequence": "uniform four-step full-refresh segment; same image and eps; true interpolants at every point",
+        "memory": "detached state across four points",
+        "own_trajectory_training": false,
+        "full_layers": 28,
+        "student_layers": 10,
+        "student_keep_indices": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "anchor_every": 4,
+        "full_ode_steps_1based": [
+          1,
+          5,
+          9,
+          13,
+          17
+        ],
+        "image_size": 512,
+        "sampling_steps": 20,
+        "cfg": 4.5,
+        "bridge_enabled": true,
+        "bridge_rank": 256,
+        "feature_weight": 0.1,
+        "bridge_target_layers_1based": [
+          9,
+          28
+        ],
+        "bridge_initialization": "zero output weights and biases; initially identity",
+        "lr": 1e-05,
+        "grad_clip": 1.0,
+        "seed": 20260927,
+        "trainable_parameters": 221303200,
+        "resident_parameters": 592933792,
+        "training_forward_calls_per_image": {
+          "student": 4,
+          "teacher": 4
+        },
+        "code_sha256": "7e889863e94bbd87afb08b51475b9ce5a3789b3ee4658a95e603295bc6999ebf"
+      },
+      "completion": {
+        "step": 774,
+        "updates": 774,
+        "epochs": 2,
+        "samples": 98992,
+        "supervised_noise_points": 395968,
+        "elapsed_training_sec": 1858.5334403514862
+      },
+      "initial_validation": {
+        "step": 0,
+        "kind": "fixed_val_32_discrete_sigma",
+        "anchor_every": 4,
+        "real_mse": 1.8468942493200302,
+        "teacher_mse": 1.1559467303100064,
+        "cfg_mse": 5.041393720639462,
+        "teacher_real_mse": 0.7015255382284522,
+        "no_memory_real_mse": 1.8448594734072685,
+        "subnet_no_memory_real_mse": 2.1636648066341877,
+        "own_teacher_mse": 1.016548907253764,
+        "own_cfg_mse": 5.2394387261301745,
+        "own_latent_mse": 0.05179826258608955
+      },
+      "final_validation": {
+        "step": 774,
+        "kind": "fixed_val_32_discrete_sigma",
+        "anchor_every": 4,
+        "real_mse": 0.8338160794228315,
+        "teacher_mse": 0.13233654240320902,
+        "cfg_mse": 0.739622111665085,
+        "teacher_real_mse": 0.7015255382284522,
+        "no_memory_real_mse": 0.8351500742137432,
+        "subnet_no_memory_real_mse": 0.8665032666176558,
+        "own_teacher_mse": 0.11720124796556775,
+        "own_cfg_mse": 0.654621138703078,
+        "own_latent_mse": 0.013525339170882944
+      },
+      "initial_trajectory": {
+        "step": 0,
+        "kind": "fixed32_all20_sigmas",
+        "cases": 32,
+        "noise_points": 640,
+        "normal": {
+          "real_mse": 1.7583957724273205,
+          "teacher_mse": 1.0487939585000277,
+          "cfg_mse": 5.010755270719528,
+          "full_real_mse": 0.7010656520724297,
+          "subnet_real_mse": 2.1108392477035522,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.66733459532261
+        },
+        "zero": {
+          "real_mse": 1.7515748552978039,
+          "teacher_mse": 1.0393391475081444,
+          "cfg_mse": 5.096615724265575,
+          "full_real_mse": 0.7010656520724297,
+          "subnet_real_mse": 2.101744696497917,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.59049454033375
+        },
+        "shuffle": {
+          "real_mse": 1.740405097603798,
+          "teacher_mse": 1.028742304071784,
+          "cfg_mse": 4.98605389893055,
+          "full_real_mse": 0.7010656520724297,
+          "subnet_real_mse": 2.0868516601622105,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.634593901038171
+        },
+        "own20": {
+          "teacher_mse": 0.9558063503354788,
+          "cfg_mse": 4.928233779966831,
+          "teacher_endpoint_latent_mse": 1.5376121923327446
+        }
+      },
+      "final_trajectory": {
+        "step": 774,
+        "kind": "fixed32_all20_sigmas",
+        "cases": 32,
+        "noise_points": 640,
+        "normal": {
+          "real_mse": 0.8110475083813071,
+          "teacher_mse": 0.10737170523498207,
+          "cfg_mse": 0.7473799893632531,
+          "full_real_mse": 0.6815777029842138,
+          "subnet_real_mse": 0.8542041536420584,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.366442680358886
+        },
+        "zero": {
+          "real_mse": 0.8123649107292295,
+          "teacher_mse": 0.10849406092893332,
+          "cfg_mse": 0.7555545950308442,
+          "full_real_mse": 0.6815777029842138,
+          "subnet_real_mse": 0.8559606913477182,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.274669402837754
+        },
+        "shuffle": {
+          "real_mse": 0.812663447111845,
+          "teacher_mse": 0.10867697361391038,
+          "cfg_mse": 0.7553288284689188,
+          "full_real_mse": 0.6815777029842138,
+          "subnet_real_mse": 0.8563587423413992,
+          "teacher_real_mse": 0.7095108553767204,
+          "mean_state_rms": 7.344927215576172
+        },
+        "own20": {
+          "teacher_mse": 0.09035701432731003,
+          "cfg_mse": 0.6448249574750662,
+          "teacher_endpoint_latent_mse": 0.6090378388762474
+        }
+      },
+      "timing_seconds": {
+        "teacher": 0.649347722530365,
+        "hybrid_loop": 0.4368934631347656,
+        "student_loop": 0.33317792415618896,
+        "full_shared": 0.7310851216316223
+      },
+      "peak_allocated_gib": 63.2764310836792,
+      "peak_reserved_gib": 72.56640625,
+      "last250_clip_fraction": 0.012,
+      "sample_schedule_sha256": "86c7a48a691e1ccc5ad4a68dfcb1c595136d3514176193dc0b69b1a539d14d0a",
+      "checkpoint_sha256": "bc260bb2c3ec0867111f5353ade309582459e52e727244b53f9442d5f9291c1b",
+      "exact_two_epoch_coverage": true,
+      "validation_history": [
+        {
+          "step": 0,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 1.8468942493200302,
+          "teacher_mse": 1.1559467303100064,
+          "cfg_mse": 5.041393720639462,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 1.8448594734072685,
+          "subnet_no_memory_real_mse": 2.1636648066341877,
+          "own_teacher_mse": 1.016548907253764,
+          "own_cfg_mse": 5.2394387261301745,
+          "own_latent_mse": 0.05179826258608955
+        },
+        {
+          "step": 100,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.9766675233840942,
+          "teacher_mse": 0.2707579480338609,
+          "cfg_mse": 1.0605098840314895,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.9787522759288549,
+          "subnet_no_memory_real_mse": 1.0057447869330645,
+          "own_teacher_mse": 0.23247556506248657,
+          "own_cfg_mse": 1.0302501083351672,
+          "own_latent_mse": 0.01680312470671197
+        },
+        {
+          "step": 200,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.9014400728046894,
+          "teacher_mse": 0.19668052169436123,
+          "cfg_mse": 0.9028006626758724,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.9032000713050365,
+          "subnet_no_memory_real_mse": 0.9238024447113276,
+          "own_teacher_mse": 0.17132914687681478,
+          "own_cfg_mse": 0.836474945768714,
+          "own_latent_mse": 0.01508162341087882
+        },
+        {
+          "step": 300,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8763752970844507,
+          "teacher_mse": 0.1729874483862659,
+          "cfg_mse": 0.849939959589392,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8781285481527448,
+          "subnet_no_memory_real_mse": 0.9002331169322133,
+          "own_teacher_mse": 0.15078554797219113,
+          "own_cfg_mse": 0.7490952934604138,
+          "own_latent_mse": 0.01450942781775666
+        },
+        {
+          "step": 387,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8637273944914341,
+          "teacher_mse": 0.1607166824178421,
+          "cfg_mse": 0.8218731344677508,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8652019854635,
+          "subnet_no_memory_real_mse": 0.8887177743017673,
+          "own_teacher_mse": 0.14126051927451044,
+          "own_cfg_mse": 0.7293693914543837,
+          "own_latent_mse": 0.01416489934490528
+        },
+        {
+          "step": 400,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8618498761206865,
+          "teacher_mse": 0.1590878091592458,
+          "cfg_mse": 0.8205890567041934,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8634555144235492,
+          "subnet_no_memory_real_mse": 0.8870629938319325,
+          "own_teacher_mse": 0.13953959720674902,
+          "own_cfg_mse": 0.7312640513991937,
+          "own_latent_mse": 0.014128144490314298
+        },
+        {
+          "step": 500,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8519616927951574,
+          "teacher_mse": 0.14951180753996596,
+          "cfg_mse": 0.789787313202396,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8535299506038427,
+          "subnet_no_memory_real_mse": 0.8792301639914513,
+          "own_teacher_mse": 0.13182850891462294,
+          "own_cfg_mse": 0.6880409360164776,
+          "own_latent_mse": 0.013921929310527048
+        },
+        {
+          "step": 600,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8437553057447076,
+          "teacher_mse": 0.14220907786511816,
+          "cfg_mse": 0.7646615128032863,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8451025541871786,
+          "subnet_no_memory_real_mse": 0.8733256794512272,
+          "own_teacher_mse": 0.12598228736897,
+          "own_cfg_mse": 0.6703242563526146,
+          "own_latent_mse": 0.013736327977312612
+        },
+        {
+          "step": 700,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8372991513460875,
+          "teacher_mse": 0.13672505183785688,
+          "cfg_mse": 0.7560823957901448,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8385799983516335,
+          "subnet_no_memory_real_mse": 0.869243229739368,
+          "own_teacher_mse": 0.12128343265794683,
+          "own_cfg_mse": 0.6737079928279854,
+          "own_latent_mse": 0.013610485020763008
+        },
+        {
+          "step": 774,
+          "kind": "fixed_val_32_discrete_sigma",
+          "anchor_every": 4,
+          "real_mse": 0.8338160794228315,
+          "teacher_mse": 0.13233654240320902,
+          "cfg_mse": 0.739622111665085,
+          "teacher_real_mse": 0.7015255382284522,
+          "no_memory_real_mse": 0.8351500742137432,
+          "subnet_no_memory_real_mse": 0.8665032666176558,
+          "own_teacher_mse": 0.11720124796556775,
+          "own_cfg_mse": 0.654621138703078,
+          "own_latent_mse": 0.013525339170882944
+        }
+      ],
+      "trajectory_history": [
+        {
+          "step": 0,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 1.7583957724273205,
+            "teacher_mse": 1.0487939585000277,
+            "cfg_mse": 5.010755270719528,
+            "full_real_mse": 0.7010656520724297,
+            "subnet_real_mse": 2.1108392477035522,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.66733459532261
+          },
+          "zero": {
+            "real_mse": 1.7515748552978039,
+            "teacher_mse": 1.0393391475081444,
+            "cfg_mse": 5.096615724265575,
+            "full_real_mse": 0.7010656520724297,
+            "subnet_real_mse": 2.101744696497917,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.59049454033375
+          },
+          "shuffle": {
+            "real_mse": 1.740405097603798,
+            "teacher_mse": 1.028742304071784,
+            "cfg_mse": 4.98605389893055,
+            "full_real_mse": 0.7010656520724297,
+            "subnet_real_mse": 2.0868516601622105,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.634593901038171
+          },
+          "own20": {
+            "teacher_mse": 0.9558063503354788,
+            "cfg_mse": 4.928233779966831,
+            "teacher_endpoint_latent_mse": 1.5376121923327446
+          }
+        },
+        {
+          "step": 100,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.937616853043437,
+            "teacher_mse": 0.22485541412606835,
+            "cfg_mse": 1.2020882405340672,
+            "full_real_mse": 0.6999288247898221,
+            "subnet_real_mse": 1.0168462302535772,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 8.055357295274735
+          },
+          "zero": {
+            "real_mse": 0.9389935489743948,
+            "teacher_mse": 0.22587570920586586,
+            "cfg_mse": 1.212023451924324,
+            "full_real_mse": 0.6999288247898221,
+            "subnet_real_mse": 1.0186818465590477,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.96063952744007
+          },
+          "shuffle": {
+            "real_mse": 0.9390060734003782,
+            "teacher_mse": 0.22592131653800607,
+            "cfg_mse": 1.207606865093112,
+            "full_real_mse": 0.6999288247898221,
+            "subnet_real_mse": 1.0186985041946173,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 8.038594883680346
+          },
+          "own20": {
+            "teacher_mse": 0.18715730356052518,
+            "cfg_mse": 1.0973793901503086,
+            "teacher_endpoint_latent_mse": 0.7865040339529514
+          }
+        },
+        {
+          "step": 200,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8708761474117637,
+            "teacher_mse": 0.16127480030991137,
+            "cfg_mse": 0.9778096452355385,
+            "full_real_mse": 0.6927463067695498,
+            "subnet_real_mse": 0.9302527662366629,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.967397260665894
+          },
+          "zero": {
+            "real_mse": 0.8723142547532916,
+            "teacher_mse": 0.16242712642997503,
+            "cfg_mse": 0.9881893508136272,
+            "full_real_mse": 0.6927463067695498,
+            "subnet_real_mse": 0.932170283049345,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.8729028731584565
+          },
+          "shuffle": {
+            "real_mse": 0.87250439170748,
+            "teacher_mse": 0.16266045905649662,
+            "cfg_mse": 0.9865257535129786,
+            "full_real_mse": 0.6927463067695498,
+            "subnet_real_mse": 0.9324237909168005,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.948825937509538
+          },
+          "own20": {
+            "teacher_mse": 0.13427238841541111,
+            "cfg_mse": 0.8756364090368152,
+            "teacher_endpoint_latent_mse": 0.6994300866499543
+          }
+        },
+        {
+          "step": 300,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.848723066970706,
+            "teacher_mse": 0.13990916381590068,
+            "cfg_mse": 0.889979911968112,
+            "full_real_mse": 0.6875345138832927,
+            "subnet_real_mse": 0.9024525871500373,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.839729073643684
+          },
+          "zero": {
+            "real_mse": 0.8501893635839224,
+            "teacher_mse": 0.14118809206411242,
+            "cfg_mse": 0.899056801572442,
+            "full_real_mse": 0.6875345138832927,
+            "subnet_real_mse": 0.9044076818972826,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.745408168435096
+          },
+          "shuffle": {
+            "real_mse": 0.8503553792834282,
+            "teacher_mse": 0.1412995874416083,
+            "cfg_mse": 0.8982337322086096,
+            "full_real_mse": 0.6875345138832927,
+            "subnet_real_mse": 0.9046290442347527,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.820374941825869
+          },
+          "own20": {
+            "teacher_mse": 0.1175265172496438,
+            "cfg_mse": 0.7794951908290386,
+            "teacher_endpoint_latent_mse": 0.6712580481544137
+          }
+        },
+        {
+          "step": 387,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8369134729728103,
+            "teacher_mse": 0.13018858805298805,
+            "cfg_mse": 0.8480203952640295,
+            "full_real_mse": 0.684847823344171,
+            "subnet_real_mse": 0.8876020349562168,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.7091203898191445
+          },
+          "zero": {
+            "real_mse": 0.8382190568372607,
+            "teacher_mse": 0.1313465740531683,
+            "cfg_mse": 0.8580803358927369,
+            "full_real_mse": 0.684847823344171,
+            "subnet_real_mse": 0.8893428109586239,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.616527992486954
+          },
+          "shuffle": {
+            "real_mse": 0.8384194001555443,
+            "teacher_mse": 0.13143432792276144,
+            "cfg_mse": 0.8564048884436488,
+            "full_real_mse": 0.684847823344171,
+            "subnet_real_mse": 0.8896099617704749,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.6889672607183455
+          },
+          "own20": {
+            "teacher_mse": 0.11100650206208229,
+            "cfg_mse": 0.7474756073206663,
+            "teacher_endpoint_latent_mse": 0.6667336039245129
+          }
+        },
+        {
+          "step": 400,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8352028345689178,
+            "teacher_mse": 0.1287375942338258,
+            "cfg_mse": 0.8422446707263589,
+            "full_real_mse": 0.6845665918663144,
+            "subnet_real_mse": 0.8854149496182799,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.718163198232652
+          },
+          "zero": {
+            "real_mse": 0.8366226172074676,
+            "teacher_mse": 0.1299813457299024,
+            "cfg_mse": 0.8517895480617881,
+            "full_real_mse": 0.6845665918663144,
+            "subnet_real_mse": 0.8873079866170883,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.625194138288499
+          },
+          "shuffle": {
+            "real_mse": 0.836841139011085,
+            "teacher_mse": 0.13010417926125228,
+            "cfg_mse": 0.8505936171859503,
+            "full_real_mse": 0.6845665918663144,
+            "subnet_real_mse": 0.8875993508845568,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.698153474926948
+          },
+          "own20": {
+            "teacher_mse": 0.10875350655987859,
+            "cfg_mse": 0.7396928574889898,
+            "teacher_endpoint_latent_mse": 0.6622377689927816
+          }
+        },
+        {
+          "step": 500,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8267043149098754,
+            "teacher_mse": 0.12045665713958442,
+            "cfg_mse": 0.8045631283894181,
+            "full_real_mse": 0.683217715471983,
+            "subnet_real_mse": 0.8745332015678287,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.611078274250027
+          },
+          "zero": {
+            "real_mse": 0.8281276104971766,
+            "teacher_mse": 0.12166717951186001,
+            "cfg_mse": 0.8131892550736666,
+            "full_real_mse": 0.683217715471983,
+            "subnet_real_mse": 0.8764309482648969,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.518113198876381
+          },
+          "shuffle": {
+            "real_mse": 0.8284500250592828,
+            "teacher_mse": 0.12190626747906208,
+            "cfg_mse": 0.8129147049039602,
+            "full_real_mse": 0.683217715471983,
+            "subnet_real_mse": 0.8768608411774039,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.590773779153825
+          },
+          "own20": {
+            "teacher_mse": 0.10103463474661112,
+            "cfg_mse": 0.7047946024686098,
+            "teacher_endpoint_latent_mse": 0.6464898930862546
+          }
+        },
+        {
+          "step": 600,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8196826949715614,
+            "teacher_mse": 0.11538972787093371,
+            "cfg_mse": 0.7792414138093591,
+            "full_real_mse": 0.6823141239583492,
+            "subnet_real_mse": 0.8654722357168794,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.506889221072198
+          },
+          "zero": {
+            "real_mse": 0.8209487767890096,
+            "teacher_mse": 0.11651229707058519,
+            "cfg_mse": 0.7879618424922228,
+            "full_real_mse": 0.6823141239583492,
+            "subnet_real_mse": 0.8671603510156274,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.414362469315529
+          },
+          "shuffle": {
+            "real_mse": 0.8213263368234038,
+            "teacher_mse": 0.11675981536973268,
+            "cfg_mse": 0.7871881695464253,
+            "full_real_mse": 0.6823141239583492,
+            "subnet_real_mse": 0.8676637876778841,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.485966756939886
+          },
+          "own20": {
+            "teacher_mse": 0.09723816346377134,
+            "cfg_mse": 0.6828063577413559,
+            "teacher_endpoint_latent_mse": 0.6327353082597256
+          }
+        },
+        {
+          "step": 700,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8137676054611802,
+            "teacher_mse": 0.11088607006240636,
+            "cfg_mse": 0.7614785181358457,
+            "full_real_mse": 0.6818222077563405,
+            "subnet_real_mse": 0.8577494509518147,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.431043124198915
+          },
+          "zero": {
+            "real_mse": 0.8149712141603231,
+            "teacher_mse": 0.11195106094237417,
+            "cfg_mse": 0.771097925491631,
+            "full_real_mse": 0.6818222077563405,
+            "subnet_real_mse": 0.8593542398884892,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.338371369242666
+          },
+          "shuffle": {
+            "real_mse": 0.8153398921713233,
+            "teacher_mse": 0.11215740721672773,
+            "cfg_mse": 0.7694632764905691,
+            "full_real_mse": 0.6818222077563405,
+            "subnet_real_mse": 0.8598458003252745,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.410122737288473
+          },
+          "own20": {
+            "teacher_mse": 0.09342038398608565,
+            "cfg_mse": 0.6580237448215485,
+            "teacher_endpoint_latent_mse": 0.621332542039454
+          }
+        },
+        {
+          "step": 774,
+          "kind": "fixed32_all20_sigmas",
+          "cases": 32,
+          "noise_points": 640,
+          "normal": {
+            "real_mse": 0.8110475083813071,
+            "teacher_mse": 0.10737170523498207,
+            "cfg_mse": 0.7473799893632531,
+            "full_real_mse": 0.6815777029842138,
+            "subnet_real_mse": 0.8542041536420584,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.366442680358886
+          },
+          "zero": {
+            "real_mse": 0.8123649107292295,
+            "teacher_mse": 0.10849406092893332,
+            "cfg_mse": 0.7555545950308442,
+            "full_real_mse": 0.6815777029842138,
+            "subnet_real_mse": 0.8559606913477182,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.274669402837754
+          },
+          "shuffle": {
+            "real_mse": 0.812663447111845,
+            "teacher_mse": 0.10867697361391038,
+            "cfg_mse": 0.7553288284689188,
+            "full_real_mse": 0.6815777029842138,
+            "subnet_real_mse": 0.8563587423413992,
+            "teacher_real_mse": 0.7095108553767204,
+            "mean_state_rms": 7.344927215576172
+          },
+          "own20": {
+            "teacher_mse": 0.09035701432731003,
+            "cfg_mse": 0.6448249574750662,
+            "teacher_endpoint_latent_mse": 0.6090378388762474
+          }
+        }
+      ]
+    }
+  },
+  "paired_comparisons": {
+    "sequence4_minus_control4": {
+      "normal_real_mse": {
+        "delta": 6.306823343038559e-05,
+        "ci95": [
+          -0.00021132919937372208,
+          0.0003401804715394974
+        ],
+        "unit": "original validation image",
+        "cases": 32
+      },
+      "normal_subnet_real_mse": {
+        "delta": 0.00010209716856479645,
+        "ci95": [
+          -0.0002614762634038925,
+          0.0004651583731174469
+        ],
+        "unit": "original validation image",
+        "cases": 32
+      },
+      "own20_cfg_mse": {
+        "delta": 0.0030536530539393425,
+        "ci95": [
+          -0.0008788499981164932,
+          0.007134921848773956
+        ],
+        "unit": "original validation image",
+        "cases": 32
+      },
+      "own20_teacher_endpoint_latent_mse": {
+        "delta": -0.0023634862154722214,
+        "ci95": [
+          -0.006961951032280922,
+          0.0019190777093172073
+        ],
+        "unit": "original validation image",
+        "cases": 32
+      }
+    },
+    "sequence4_bridge_minus_sequence4": {
+      "normal_real_mse": {
+        "delta": -0.002605527639389038,
+        "ci95": [
+          -0.0031880103051662445,
+          -0.0020198971033096313
+        ],
+        "unit": "original validation image",
+        "cases": 32
+      },
+      "normal_subnet_real_mse": {
+        "delta": -0.0033902162685990334,
+        "ci95": [
+          -0.0041092755272984505,
+          -0.0026672519743442535
+        ],
+        "unit": "original validation image",
+        "cases": 32
+      },
+      "own20_cfg_mse": {
+        "delta": -0.018039239570498466,
+        "ci95": [
+          -0.024220488034188747,
+          -0.011801254004240036
+        ],
+        "unit": "original validation image",
+        "cases": 32
+      },
+      "own20_teacher_endpoint_latent_mse": {
+        "delta": -0.011226799339056015,
+        "ci95": [
+          -0.02386281080543995,
+          0.001437520608305931
+        ],
+        "unit": "original validation image",
+        "cases": 32
+      }
+    }
+  },
+  "interpretation": "single training seed; bootstrap resamples original validation cases only"
+}
