@@ -1,6 +1,20 @@
 # Sana 跨 ODE Transformer 循环实验
 
-本仓库保存 2026-09-28 的实验代码快照。基座为 `Efficient-Large-Model/Sana_600M_512px_diffusers`，当前数据来自 `jackyhate/text-to-image-2M` 的一个 WebDataset shard。`SOURCE_SNAPSHOT.json` 记录原始文件的 SHA-256；已有训练脚本和报告保留原内容。
+本仓库包含 2026-09-28 的实验代码快照及 2026-09-30 的优化实验入口。基座为 `Efficient-Large-Model/Sana_600M_512px_diffusers`，当前数据来自 `jackyhate/text-to-image-2M` 的一个 WebDataset shard。`SOURCE_SNAPSHOT.json` 记录原始快照文件的 SHA-256；新增优化文件不在原始快照清单中。
+
+## 2026-09-30 优化实验
+
+新增四组固定预算实验：外层残差缓存、移除真实 FM 损失的 teacher 蒸馏、在 student 自身生成轨迹上蒸馏，以及缓存与自身轨迹的组合。均从原始预训练权重开始，真实 BS128、两轮训练。方案与完成条件见 [LOOP_OPTIMIZATION_PROTOCOL.md](LOOP_OPTIMIZATION_PROTOCOL.md)。这些新配置的完整效果尚待训练验证；下方结果属于此前已完成的三组实验。
+
+训练入口为 `train_sana_loop_optimized.py`；原实验机器可用 `bash run_loop_optimization.sh` 顺序运行。队列需要旧桥接组的完整检查点和评估产物，且使用 `/tmp/sana_finetune2m` 作为临时输出。迁移机器时先修改队列路径和准备旧对照产物。单独运行新配置的例子：
+
+```bash
+torchrun --standalone --nproc_per_node=8 train_sana_loop_optimized.py \
+  --root "$PWD" --variant cache_bridge --epochs 2 --val-every 200 \
+  --output "$PWD/results_loop_opt_cache_bridge"
+```
+
+输出目录必须尚无检查点。完成后由 `summarize_loop_optimization.py` 检查样本覆盖、噪声时间表和检查点复制哈希，并输出对照报告。
 
 ## 当前方案
 
